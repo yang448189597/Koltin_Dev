@@ -1,29 +1,29 @@
 package com.luke.dlytoutiao.base
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import androidx.fragment.app.Fragment
 import com.luke.dlytoutiao.mvp.persenter.BasePersenter
 import com.luke.dlytoutiao.mvp.view.BaseView
 
-abstract class BaseActivity<V, P : BasePersenter<V>> : AppCompatActivity(), BaseView {
+abstract class BaseFragment<V, P : BasePersenter<V>> : Fragment(), BaseView {
 
-    private var mPersenter: P? = null;
+    private var mPersenter: P? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(getLayoutId())
-        if (mPersenter == null) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        if (mPersenter == null){
             mPersenter = createPersenter()
         }
-        mPersenter!!.bindView(this as V);
+        mPersenter!!.bindView(this as V)
         initView()
         initData()
     }
 
     protected abstract fun getLayoutId(): Int
-    protected abstract fun initView()
     protected abstract fun initData()
-    protected abstract fun createPersenter(): P
+    protected abstract fun initView()
+    protected abstract fun createPersenter(): P?
 
     fun getPersenter() = mPersenter
 

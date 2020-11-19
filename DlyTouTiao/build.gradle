@@ -7,6 +7,7 @@ buildscript {
     }
     dependencies {
         classpath "com.android.tools.build:gradle:4.1.1"
+        classpath 'com.google.gms:google-services:4.0.1'  //这行对谷歌服务库进行依赖
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
         // NOTE: Do not place your application dependencies here; they belong
@@ -18,6 +19,10 @@ allprojects {
     repositories {
         google()
         jcenter()
+        mavenCentral ()
+        maven {
+            url "https://maven.google.com"
+        }
     }
 }
 
